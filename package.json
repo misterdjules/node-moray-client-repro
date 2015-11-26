@@ -1,0 +1,16 @@
+{
+  "name": "node-moray-client-repro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Julien Gilli",
+  "license": "ISC",
+  "dependencies": {
+    "bunyan": "^1.5.1",
+    "moray": "git+ssh://git@github.com:joyent/node-moray.git",
+    "vasync": "^1.6.3"
+  }
+}
