@@ -19,7 +19,7 @@ function connectToMoray(callback) {
 
     var morayClient = moray.createClient(MORAY_CLIENT_CONFIG);
 
-    morayClient.on('connect', function onConnect() {
+    morayClient.once('connect', function onConnect() {
         console.log('moray client connected');
         return callback(null, morayClient);
     });
