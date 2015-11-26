@@ -20,7 +20,7 @@ function connectToMoray(callback) {
     var morayClient = moray.createClient(MORAY_CLIENT_CONFIG);
 
     morayClient.once('connect', function onConnect() {
-        console.log('moray client connected');
+        console.log('moray client connected!');
         return callback(null, morayClient);
     });
 
@@ -29,21 +29,15 @@ function connectToMoray(callback) {
     });
 }
 
+function closeMorayConnection(morayClient, callback) {
+	console.log('closing moray connection...');
+	morayClient.close();
+	return callback();
+}
+
 vasync.waterfall([
 	connectToMoray,
-	function deleteNonExistingVms(morayClient, next) {
-		morayClient.deleteMany(VMAPI_VMS_BUCKET_NAME,
-			'(alias=non-existing-alias)',
-            {noLimit: true},
-            function onVmsDeleted(err) {
-                return next(err, morayClient);
-            });
-	},
-	function closeMorayConnection(morayClient, next) {
-		console.log('closing moray connection');
-		morayClient.close();
-		return next();
-	}
+	closeMorayConnection
 ], function allDone(err) {
 	if (err)
 		console.error(err);
