@@ -2,8 +2,6 @@ var moray = require('moray');
 var bunyan = require('bunyan');
 var vasync = require('vasync');
 
-var VMAPI_VMS_BUCKET_NAME = 'vmapi_vms';
-
 function connectToMoray(callback) {
     var MORAY_CLIENT_CONFIG = {
         host: process.env.MORAY_IP || '10.99.99.17',
